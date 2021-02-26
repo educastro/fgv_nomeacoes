@@ -30,43 +30,107 @@ for foldername in os.listdir("nomeacoes"):
             orgao_da_portaria = ato["xml"]["article"]["@artCategory"]
             link_da_portaria = ato["xml"]["article"]["@pdfPage"]
             subtitulo_da_portaria = ato["xml"]["article"]["body"]["SubTitulo"]
-            texto_da_portaria = ato["xml"]["article"]["body"]["Texto"]
+            texto_da_portaria = ato["xml"]["article"]["body"]["Texto"].lower()
 
-            quantidade_de_nomeacoes = texto_da_portaria.upper().count("NOMEAR")
-            cargo_em_comissao = texto_da_portaria.upper().find("DAS 1") or texto_da_portaria.upper().find("DAS-1")
+            for trecho in texto_da_portaria.split("</p>"):
+                if ("nomear" in trecho) and ("das 1" in trecho or "das-1" in trecho):
+                    encontrado = False
+                    nome_do_servidor = ""
 
-            if quantidade_de_nomeacoes == 1 and cargo_em_comissao > 0:
+                    regex_nomeacao_tipo_1 = re.search(r"nomear\s*\w\s\d\w\s\w+\s(.+),*\spara\sexercer\s.+das[\s-](\d+.\d+)", trecho)
 
-                regex_nomeacao_tipo_1 = re.search(r"NOMEAR\<\/strong\>\<\/p\>\<p\>(.+)\spara\sexercer\so\scargo\sde\s(.+)\W\scódigo\s(.+)\W\s\w+\s(.+)\W\<\/p\>\<p\s", texto_da_portaria)
+                    if regex_nomeacao_tipo_1 and encontrado == False:
+                        encontrado = True
+                        nome_do_servidor = regex_nomeacao_tipo_1.group(1).split(",")[0]
+                        cargo_simbolo = regex_nomeacao_tipo_1.group(2)
 
-                if regex_nomeacao_tipo_1:
-                    count += 1
-                    encontrado = True
-                    nome_do_servidor = regex_nomeacao_tipo_1.group(1)
-                    cargo_titulo = regex_nomeacao_tipo_1.group(2)
-                    cargo_simbolo = regex_nomeacao_tipo_1.group(3)
-                    cargo_lotacao = regex_nomeacao_tipo_1.group(4)
+                    regex_nomeacao_tipo_2 = re.search(r"nomear\s*\w\s\d\w\s\w+\s\w+\s\w+\s(.+),*\spara\sexercer\s.+das[\s-](\d+.\d+)", trecho)
 
-                regex_nomeacao_tipo_2 = re.search(r"NOMEAR\<\/strong\>\<\/p\>\<p\>(.+),\s.+\W\smatrícula\sSiape\snº\s\d+,\spara\sexercer\so\scargo\sem\scomissão\sde\s(.+),\scódigo\s(.+)\(\d+\),\sda\s(.+),\sficando", texto_da_portaria)
+                    if regex_nomeacao_tipo_2 and encontrado == False:
+                        encontrado = True
+                        nome_do_servidor = regex_nomeacao_tipo_2.group(1).split(",")[0]
+                        cargo_simbolo = regex_nomeacao_tipo_2.group(2)
 
-                if regex_nomeacao_tipo_2 and encontrado == False:
-                    encontado = True
-                    count += 1
-                    nome_do_servidor = regex_nomeacao_tipo_2.group(1)
-                    cargo_titulo = regex_nomeacao_tipo_2.group(2)
-                    cargo_simbolo = regex_nomeacao_tipo_2.group(3)
-                    cargo_lotacao = regex_nomeacao_tipo_2.group(4)
+                    regex_nomeacao_tipo_3 = re.search(r"nomear\s*\w\sdelegad[oa]\sde\spolícia\sfederal\s(.+),*\spara\sexercer\so.+das[\s-](\d+.\d+)", trecho)
 
-                regex_nomeacao_tipo_3 = re.search(r"Nomear\s(.+)\W\smatrícula\sn\W\s.+\W\sCPF\s.+\W\spara\sexercer\so\scargo\sem\scomissão\sde\s(.+)\W\scódigo\s(.+)\W\sda\s(.+)\W\<\/p\>", texto_da_portaria)
+                    if regex_nomeacao_tipo_3 and encontrado == False:
+                        encontrado = True
+                        nome_do_servidor = regex_nomeacao_tipo_3.group(1).split(",")[0]
+                        cargo_simbolo = regex_nomeacao_tipo_3.group(2)
 
-                if regex_nomeacao_tipo_3 and encontrado == False:
-                    encontado = True
-                    count += 1
-                    nome_do_servidor = regex_nomeacao_tipo_3.group(1)
-                    cargo_titulo = regex_nomeacao_tipo_3.group(2)
-                    cargo_simbolo = regex_nomeacao_tipo_3.group(3)
-                    cargo_lotacao = regex_nomeacao_tipo_3.group(4)
+                    regex_nomeacao_tipo_4 = re.search(r"nomear\s*[oa]\sservidora*\s(.+),*\Wmatrícula.+das[\s-](\d+.\d+)", trecho)
 
-                print(filepath + ": " + nome_do_servidor)
+                    if regex_nomeacao_tipo_4 and encontrado == False:
+                        encontrado = True
+                        nome_do_servidor = regex_nomeacao_tipo_4.group(1).split(",")[0]
+                        cargo_simbolo = regex_nomeacao_tipo_4.group(2)
+
+                    regex_nomeacao_tipo_5 = re.search(r"nomear\s*[oa]\s.+federal\s(.+),*\spara\sexercer.+das[\s-](\d+.\d+)", trecho)
+
+                    if regex_nomeacao_tipo_5 and encontrado == False:
+                        encontrado = True
+                        nome_do_servidor = regex_nomeacao_tipo_5.group(1).split(",")[0]
+                        cargo_simbolo = regex_nomeacao_tipo_5.group(2)
+
+                    regex_nomeacao_tipo_6 = re.search(r"nomear\s*[oa]\s.+federal\s(.+),*\spara\so\s.+das[\s-](\d+.\d+)", trecho)
+
+                    if regex_nomeacao_tipo_6 and encontrado == False:
+                        encontrado = True
+                        nome_do_servidor = regex_nomeacao_tipo_6.group(1).split(",")[0]
+                        cargo_simbolo = regex_nomeacao_tipo_6.group(2)
+
+                    regex_nomeacao_tipo_7 = re.search(r"nomear\s*(.+),*\scpf.+das[\s-](\d+.\d+)", trecho)
+
+                    if regex_nomeacao_tipo_7 and encontrado == False:
+                        encontrado = True
+                        nome_do_servidor = regex_nomeacao_tipo_7.group(1).split(",")[0]
+                        cargo_simbolo = regex_nomeacao_tipo_7.group(2)
+
+                    regex_nomeacao_tipo_8 = re.search(r"nomear\s*(.+?),*\smatr[íi]cula.+das[\s-](\d+.\d+)", trecho)
+
+                    if regex_nomeacao_tipo_8 and encontrado == False:
+                        encontrado = True
+                        nome_do_servidor = regex_nomeacao_tipo_8.group(1).split(",")[0]
+                        cargo_simbolo = regex_nomeacao_tipo_8.group(2)
+
+                    regex_nomeacao_tipo_9 = re.search(r"nomear\s*(.+),*\smatr[ií]cula.+das[\s-](\d+.\d+)", trecho)
+
+                    if regex_nomeacao_tipo_9 and encontrado == False:
+                        encontrado = True
+                        nome_do_servidor = regex_nomeacao_tipo_9.group(1).split(",")[0]
+                        cargo_simbolo = regex_nomeacao_tipo_9.group(2)
+
+                    regex_nomeacao_tipo_10 = re.search(r"nomear\s*(.+?),*\spara\sexercer.+das[\s-](\d+.\d+)", trecho)
+
+                    if regex_nomeacao_tipo_10 and encontrado == False:
+                        encontrado = True
+                        nome_do_servidor = regex_nomeacao_tipo_10.group(1).split(",")[0]
+                        cargo_simbolo = regex_nomeacao_tipo_10.group(2)
+
+                    regex_nomeacao_tipo_11 = re.search(r"nomear\s*(.+?),*para\so\scargo.+das[\s-](\d+.\d+)", trecho)
+
+                    if regex_nomeacao_tipo_11 and encontrado == False:
+                        encontrado = True
+                        nome_do_servidor = regex_nomeacao_tipo_11.group(1).split(",")[0]
+                        cargo_simbolo = regex_nomeacao_tipo_11.group(2)
+
+                    regex_nomeacao_tipo_12 = re.search(r"nomear\s*(.+),*\s[nd]o.+das[\s-](\d+.\d+)", trecho)
+
+                    if regex_nomeacao_tipo_12 and encontrado == False:
+                        encontrado = True
+                        nome_do_servidor = regex_nomeacao_tipo_12.group(1).split(",")[0]
+                        cargo_simbolo = regex_nomeacao_tipo_12.group(2)
+
+                    regex_nomeacao_tipo_13 = re.search(r"nomear\s*(.+?),*.+das[\s-](\d+.\d+)", trecho)
+
+                    if regex_nomeacao_tipo_13 and encontrado == False:
+                        encontrado = True
+                        nome_do_servidor = regex_nomeacao_tipo_13.group(1).split(",")[0]
+                        cargo_simbolo = regex_nomeacao_tipo_13.group(2)
+
+                    if encontrado:
+                        count += 1
+
+                    print(filepath + ": " + nome_do_servidor)
 
 print("Quantidade: " + str(count))
