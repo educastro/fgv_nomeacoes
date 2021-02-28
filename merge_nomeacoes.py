@@ -30,11 +30,12 @@ for foldername in os.listdir("nomeacoes"):
             data_da_portaria = ato["xml"]["article"]["@pubDate"]
             orgao_da_portaria = ato["xml"]["article"]["@artCategory"]
             link_da_portaria = ato["xml"]["article"]["@pdfPage"]
+            tipo_da_portaria = ato["xml"]["article"]["@artType"]
             subtitulo_da_portaria = ato["xml"]["article"]["body"]["SubTitulo"]
             texto_da_portaria = ato["xml"]["article"]["body"]["Texto"].lower()
 
             for trecho in texto_da_portaria.split("</p>"):
-                if ("nomear" in trecho) and ("das 1" in trecho or "das-1" in trecho):
+                if ("nomear" in trecho) and ("das 1" in trecho or "das-1" in trecho) and (tipo_da_portaria != "Retificação"):
                     encontrado = False
                     nome_do_servidor = ""
                     index += 1
