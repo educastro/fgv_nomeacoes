@@ -261,9 +261,9 @@ for foldername in os.listdir("nomeacoes"):
                     if encontrado:
                         count += 1
 
-                    if nome_do_servidor != "" and regex=="regex_nomeacao_tipo_2":
-                        print(str(index) + " - " + regex + " - " + filepath + ": " + nome_do_servidor)
+                    # if nome_do_servidor == "":# and regex=="regex_nomeacao_tipo_2":
+                    #     print(str(index) + " - " + regex + " - " + filepath + ": " + nome_do_servidor)
 
-                    #print(str(index) + " - " + regex + " - " + filepath + ": " + nome_do_servidor)
+                    print(str(index) + " - " + regex + " - " + filepath + ": " + nome_do_servidor)
 
 print("Quantidade: " + str(count))
