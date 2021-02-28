@@ -73,7 +73,7 @@ for foldername in os.listdir("nomeacoes"):
                         nome_do_servidor = regex_nomeacao_tipo_4.group(1).split(",")[0]
                         cargo_simbolo = regex_nomeacao_tipo_4.group(2)
 
-                    regex_nomeacao_tipo_5 = re.search(r"nomear\W*\s*[oa]\s.+federal\s(.+),*\spara\sexercer.+das[\s-](\d+.\d+)", trecho)
+                    regex_nomeacao_tipo_5 = re.search(r"nomear\W*\s*[oa]\sservidora*\s(.+),*\scpf.+das[\s-](\d+.\d+)", trecho)
 
                     if regex_nomeacao_tipo_5 and encontrado == False:
                         regex = "regex_nomeacao_tipo_5"
@@ -81,7 +81,7 @@ for foldername in os.listdir("nomeacoes"):
                         nome_do_servidor = regex_nomeacao_tipo_5.group(1).split(",")[0]
                         cargo_simbolo = regex_nomeacao_tipo_5.group(2)
 
-                    regex_nomeacao_tipo_6 = re.search(r"nomear\W*\s*[oa]\s.+federal\s(.+),*\spara\so\s.+das[\s-](\d+.\d+)", trecho)
+                    regex_nomeacao_tipo_6 = re.search(r"nomear\W*\s*[oa]\s.+federal\sdo\sbrasil\s(.+),*\spara\sexercer.+das[\s-](\d+.\d+)", trecho)
 
                     if regex_nomeacao_tipo_6 and encontrado == False:
                         regex = "regex_nomeacao_tipo_6"
@@ -89,7 +89,7 @@ for foldername in os.listdir("nomeacoes"):
                         nome_do_servidor = regex_nomeacao_tipo_6.group(1).split(",")[0]
                         cargo_simbolo = regex_nomeacao_tipo_6.group(2)
 
-                    regex_nomeacao_tipo_7 = re.search(r"nomear\W*\s*(.+),*\scpf.+das[\s-](\d+.\d+)", trecho)
+                    regex_nomeacao_tipo_7 = re.search(r"nomear\W*\s*[oa]\s.+federal\s(.+),*\spara\sexercer.+das[\s-](\d+.\d+)", trecho)
 
                     if regex_nomeacao_tipo_7 and encontrado == False:
                         regex = "regex_nomeacao_tipo_7"
@@ -97,7 +97,7 @@ for foldername in os.listdir("nomeacoes"):
                         nome_do_servidor = regex_nomeacao_tipo_7.group(1).split(",")[0]
                         cargo_simbolo = regex_nomeacao_tipo_7.group(2)
 
-                    regex_nomeacao_tipo_8 = re.search(r"nomear\W*\s*(.+?),*\smatr[íi]cula.+das[\s-](\d+.\d+)", trecho)
+                    regex_nomeacao_tipo_8 = re.search(r"nomear\W*\s*[oa]\s.+federal\s(.+),*\spara\so\s.+das[\s-](\d+.\d+)", trecho)
 
                     if regex_nomeacao_tipo_8 and encontrado == False:
                         regex = "regex_nomeacao_tipo_8"
@@ -105,7 +105,7 @@ for foldername in os.listdir("nomeacoes"):
                         nome_do_servidor = regex_nomeacao_tipo_8.group(1).split(",")[0]
                         cargo_simbolo = regex_nomeacao_tipo_8.group(2)
 
-                    regex_nomeacao_tipo_9 = re.search(r"nomear\W*\s*(.+),*\smatr[ií]cula.+das[\s-](\d+.\d+)", trecho)
+                    regex_nomeacao_tipo_9 = re.search(r"nomear\W*\s*(.+)\s\(nr\sord\s\d+\),*\scpf.+das[\s-](\d+.\d+)", trecho)
 
                     if regex_nomeacao_tipo_9 and encontrado == False:
                         regex = "regex_nomeacao_tipo_9"
@@ -113,7 +113,7 @@ for foldername in os.listdir("nomeacoes"):
                         nome_do_servidor = regex_nomeacao_tipo_9.group(1).split(",")[0]
                         cargo_simbolo = regex_nomeacao_tipo_9.group(2)
 
-                    regex_nomeacao_tipo_10 = re.search(r"nomear\W*\s*(.+?),*\spara\sexercer.+das[\s-](\d+.\d+)", trecho)
+                    regex_nomeacao_tipo_10 = re.search(r"nomear\W*\s*(.+),*\scpf.+das[\s-](\d+.\d+)", trecho)
 
                     if regex_nomeacao_tipo_10 and encontrado == False:
                         regex = "regex_nomeacao_tipo_10"
@@ -121,7 +121,7 @@ for foldername in os.listdir("nomeacoes"):
                         nome_do_servidor = regex_nomeacao_tipo_10.group(1).split(",")[0]
                         cargo_simbolo = regex_nomeacao_tipo_10.group(2)
 
-                    regex_nomeacao_tipo_11 = re.search(r"nomear\W*\s*(.+?),*para\so\scargo.+das[\s-](\d+.\d+)", trecho)
+                    regex_nomeacao_tipo_11 = re.search(r"nomear\W*\s*(.+?),*\smatr[íi]cula.+das[\s-](\d+.\d+)", trecho)
 
                     if regex_nomeacao_tipo_11 and encontrado == False:
                         regex = "regex_nomeacao_tipo_11"
@@ -129,7 +129,7 @@ for foldername in os.listdir("nomeacoes"):
                         nome_do_servidor = regex_nomeacao_tipo_11.group(1).split(",")[0]
                         cargo_simbolo = regex_nomeacao_tipo_11.group(2)
 
-                    regex_nomeacao_tipo_12 = re.search(r"nomear\W*\s*(.+),*\s[nd]o.+das[\s-](\d+.\d+)", trecho)
+                    regex_nomeacao_tipo_12 = re.search(r"nomear\W*\s*(.+),*\smatr[ií]cula.+das[\s-](\d+.\d+)", trecho)
 
                     if regex_nomeacao_tipo_12 and encontrado == False:
                         regex = "regex_nomeacao_tipo_12"
@@ -137,13 +137,45 @@ for foldername in os.listdir("nomeacoes"):
                         nome_do_servidor = regex_nomeacao_tipo_12.group(1).split(",")[0]
                         cargo_simbolo = regex_nomeacao_tipo_12.group(2)
 
-                    regex_nomeacao_tipo_13 = re.search(r"nomear\W*\s*(.+?),*.+das[\s-](\d+.\d+)", trecho)
+                    regex_nomeacao_tipo_13 = re.search(r"nomear\W*\s*o\scmg\s\(im\)\s(.+?),*\spara\sexercer.+das[\s-](\d+.\d+)", trecho)
 
                     if regex_nomeacao_tipo_13 and encontrado == False:
-                        regex = "regex_nomeacao_tipo_14"
+                        regex = "regex_nomeacao_tipo_13"
                         encontrado = True
                         nome_do_servidor = regex_nomeacao_tipo_13.group(1).split(",")[0]
                         cargo_simbolo = regex_nomeacao_tipo_13.group(2)
+
+                    regex_nomeacao_tipo_14 = re.search(r"nomear\W*\s*(.+?),*\spara\sexercer.+das[\s-](\d+.\d+)", trecho)
+
+                    if regex_nomeacao_tipo_14 and encontrado == False:
+                        regex = "regex_nomeacao_tipo_14"
+                        encontrado = True
+                        nome_do_servidor = regex_nomeacao_tipo_14.group(1).split(",")[0]
+                        cargo_simbolo = regex_nomeacao_tipo_14.group(2)
+
+                    regex_nomeacao_tipo_15 = re.search(r"nomear\W*\s*(.+?),*para\so\scargo.+das[\s-](\d+.\d+)", trecho)
+
+                    if regex_nomeacao_tipo_15 and encontrado == False:
+                        regex = "regex_nomeacao_tipo_15"
+                        encontrado = True
+                        nome_do_servidor = regex_nomeacao_tipo_15.group(1).split(",")[0]
+                        cargo_simbolo = regex_nomeacao_tipo_15.group(2)
+
+                    regex_nomeacao_tipo_16 = re.search(r"nomear\W*\s*(.+),*\s[nd]o.+das[\s-](\d+.\d+)", trecho)
+
+                    if regex_nomeacao_tipo_16 and encontrado == False:
+                        regex = "regex_nomeacao_tipo_16"
+                        encontrado = True
+                        nome_do_servidor = regex_nomeacao_tipo_16.group(1).split(",")[0]
+                        cargo_simbolo = regex_nomeacao_tipo_16.group(2)
+
+                    regex_nomeacao_tipo_17 = re.search(r"nomear\W*\s*(.+?),*.+das[\s-](\d+.\d+)", trecho)
+
+                    if regex_nomeacao_tipo_17 and encontrado == False:
+                        regex = "regex_nomeacao_tipo_17"
+                        encontrado = True
+                        nome_do_servidor = regex_nomeacao_tipo_17.group(1).split(",")[0]
+                        cargo_simbolo = regex_nomeacao_tipo_17.group(2)
 
                     if encontrado:
                         count += 1
