@@ -7,7 +7,7 @@ import re
 count = 0
 index = 0
 
-with open("nomeacoes.csv", "w", encoding="latin-1", newline="") as arquivo_de_saida:
+with open("nomeacoes.csv", "w", encoding="utf-8", newline="") as arquivo_de_saida:
 
     writer = csv.writer(arquivo_de_saida)
 
@@ -631,9 +631,10 @@ with open("nomeacoes.csv", "w", encoding="latin-1", newline="") as arquivo_de_sa
                             if encontrado:
                                 count += 1
 
-                            print(str(index) + " - " + regex + " - " + endereco_do_arquivo + ": " + nome_do_servidor)
+                            if regex == "":
+                                print(str(index) + " - " + regex + " - " + endereco_do_arquivo + ": " + nome_do_servidor)
 
-                            writer.writerow([nome_do_servidor, cargo_simbolo, titulo_da_portaria, data_da_portaria, link_da_portaria])
+                            #writer.writerow([nome_do_servidor, cargo_simbolo, titulo_da_portaria, data_da_portaria, link_da_portaria])
 
     print("Quantidade: " + str(count))
     arquivo_de_saida.close()
