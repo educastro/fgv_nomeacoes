@@ -3,11 +3,13 @@ import csv
 import xmltodict
 import os
 import re
+import shutil
+import unidecode
 
 count = 0
 index = 0
 
-with open("nomeacoes.csv", "w", encoding="utf-8", newline="") as arquivo_de_saida:
+with open("nomeacoes.csv", "w", encoding="utf-8", delimiter=";", newline="") as arquivo_de_saida:
 
     writer = csv.writer(arquivo_de_saida)
 
@@ -20,6 +22,7 @@ with open("nomeacoes.csv", "w", encoding="utf-8", newline="") as arquivo_de_said
                 #endereco_do_arquivo = "nomeacoes/2019/S02102019/529_20191017_12108734.xml"
                 endereco_do_arquivo = "nomeacoes/" + pasta_ano + "/" + pasta_mes + "/" + arquivo_ato
                 endereco_do_arquivo_encontrado = "nomeacoes_ja_coletadas/" + pasta_ano + "/" + pasta_mes + "/" + arquivo_ato
+                regex = ""
 
                 with open(endereco_do_arquivo, encoding='utf-8') as ato_xml:
 
@@ -692,12 +695,13 @@ with open("nomeacoes.csv", "w", encoding="utf-8", newline="") as arquivo_de_said
                             # if regex == "" and regex == "regex_nomeacao_tipo_78":
                             #     print(str(index) + " - " + regex + " - " + endereco_do_arquivo + ": " + nome_do_servidor)
 
-                            #print(str(index) + " - " + regex + " - " + endereco_do_arquivo + ": " + nome_do_servidor)
+                            print(str(index) + " - " + regex + " - " + endereco_do_arquivo + ": " + nome_do_servidor)
 
-                            writer.writerow([nome_do_servidor, cargo_simbolo, titulo_da_portaria, data_da_portaria, link_da_portaria])
-            if regex != "":
-                print(endereco_do_arquivo)
-                os.rename(endereco_do_arquivo, endereco_do_arquivo_encontrado)
+                            writer.writerow([unidecode.unidecode(nome_do_servidor).strip(), cargo_simbolo, titulo_da_portaria, data_da_portaria, link_da_portaria])
+                if regex != "":
+                    print("movi o arquivo")
+                    ato_xml.close()
+                    shutil.move(endereco_do_arquivo, endereco_do_arquivo_encontrado)
 
     print("Quantidade: " + str(count))
     arquivo_de_saida.close()
