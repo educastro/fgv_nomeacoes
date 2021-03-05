@@ -17,7 +17,9 @@ with open("nomeacoes.csv", "w", encoding="utf-8", newline="") as arquivo_de_said
         for pasta_mes in os.listdir("nomeacoes/" + pasta_ano):
             for arquivo_ato in os.listdir("nomeacoes/" + pasta_ano + "/" + pasta_mes):
 
+                #endereco_do_arquivo = "nomeacoes/2019/S02102019/529_20191017_12108734.xml"
                 endereco_do_arquivo = "nomeacoes/" + pasta_ano + "/" + pasta_mes + "/" + arquivo_ato
+                endereco_do_arquivo_encontrado = "nomeacoes_ja_coletadas/" + pasta_ano + "/" + pasta_mes + "/" + arquivo_ato
 
                 with open(endereco_do_arquivo, encoding='utf-8') as ato_xml:
 
@@ -516,6 +518,7 @@ with open("nomeacoes.csv", "w", encoding="utf-8", newline="") as arquivo_de_said
 
                             regex_nomeacao_tipo_59 = re.search(r"nomear\W*\s*[oa]*\s\d.\ssgt\sqe\s(.+?),*\s*para\so\scargo.+das[\s-](\d+.\d+)", trecho)
 
+
                             if regex_nomeacao_tipo_59 and encontrado == False:
                                 regex = "regex_nomeacao_tipo_59"
                                 encontrado = True
@@ -531,7 +534,6 @@ with open("nomeacoes.csv", "w", encoding="utf-8", newline="") as arquivo_de_said
                                 cargo_simbolo = regex_nomeacao_tipo_60.group(2)
 
                             regex_nomeacao_tipo_61 = re.search(r"nomear\W*\s*[oa]\scabo\s\(fab\)\s(.+?),*\spara\sexercer.+das[\s-](\d+.\d+)", trecho)
-
                             if regex_nomeacao_tipo_61 and encontrado == False:
                                 regex = "regex_nomeacao_tipo_61"
                                 encontrado = True
@@ -612,7 +614,7 @@ with open("nomeacoes.csv", "w", encoding="utf-8", newline="") as arquivo_de_said
                                 cargo_simbolo = regex_nomeacao_tipo_70.group(2)
 
                             # parece que não pega nada
-                            regex_nomeacao_tipo_71 = re.search(r"nomear\W*\s*(.+?),*\s*para,*\sexercer.+das[\s-](\d+.\d+)", trecho)
+                            regex_nomeacao_tipo_71 = re.search(r"nomear\W*\s*(.+?),*\s*para,*\sa*\s*exercer.+das[\s-](\d+.\d+)", trecho)
 
                             if regex_nomeacao_tipo_71 and encontrado == False:
                                 regex = "regex_nomeacao_tipo_71"
@@ -628,13 +630,74 @@ with open("nomeacoes.csv", "w", encoding="utf-8", newline="") as arquivo_de_said
                                 nome_do_servidor = regex_nomeacao_tipo_72.group(2).split(",")[0]
                                 cargo_simbolo = regex_nomeacao_tipo_72.group(1)
 
+                            regex_nomeacao_tipo_73 = re.search(r"nomear\W*\s(.+?),*\spara\socupar\so\scargo.+das[\s-](\d+.\d+)", trecho)
+
+                            if regex_nomeacao_tipo_73 and encontrado == False:
+                                regex = "regex_nomeacao_tipo_73"
+                                encontrado = True
+                                nome_do_servidor = regex_nomeacao_tipo_73.group(1).split(",")[0]
+                                cargo_simbolo = regex_nomeacao_tipo_73.group(2)
+
+                            regex_nomeacao_tipo_74 = re.search(r"das[\s-](\d+.\d+),*\sda\scoordenação\sde\splanejamento.+\se\snomear\s(.+?),*\scpf\s", trecho)
+
+                            if regex_nomeacao_tipo_74 and encontrado == False:
+                                regex = "regex_nomeacao_tipo_74"
+                                encontrado = True
+                                nome_do_servidor = regex_nomeacao_tipo_74.group(2).split(",")[0]
+                                cargo_simbolo = regex_nomeacao_tipo_74.group(1)
+
+                            regex_nomeacao_tipo_75 = re.search(r"das[\s-](\d+.\d+),*\sdo\sserviço.+nomear\s(.+?),*\scpf\s", trecho)
+
+                            if regex_nomeacao_tipo_75 and encontrado == False:
+                                regex = "regex_nomeacao_tipo_75"
+                                encontrado = True
+                                nome_do_servidor = regex_nomeacao_tipo_75.group(2).split(",")[0]
+                                cargo_simbolo = regex_nomeacao_tipo_75.group(1)
+
+                            regex_nomeacao_tipo_76 = re.search(r"nomear\W*\s(.+?),*\spara,*\sexercer*\so\scargo.+das[\s-](\d+.\d+)", trecho)
+
+                            if regex_nomeacao_tipo_76 and encontrado == False:
+                                regex = "regex_nomeacao_tipo_76"
+                                encontrado = True
+                                nome_do_servidor = regex_nomeacao_tipo_76.group(1).split(",")[0]
+                                cargo_simbolo = regex_nomeacao_tipo_76.group(2)
+
+                            regex_nomeacao_tipo_77 = re.search(r"das[\s-](\d+.\d+),*\sd[oa]\s\w+.+e\snomear\s(.+?),*\s*cpf\s", trecho)
+
+                            if regex_nomeacao_tipo_77 and encontrado == False:
+                                regex = "regex_nomeacao_tipo_77"
+                                encontrado = True
+                                nome_do_servidor = regex_nomeacao_tipo_77.group(2).split(",")[0]
+                                cargo_simbolo = regex_nomeacao_tipo_77.group(1)
+
+                            regex_nomeacao_tipo_78 = re.search(r"das[\s-](\d+.\d+),*\se\snomear\s(.+?),*\spara\stal\s", trecho)
+
+                            if regex_nomeacao_tipo_78 and encontrado == False:
+                                regex = "regex_nomeacao_tipo_78"
+                                encontrado = True
+                                nome_do_servidor = regex_nomeacao_tipo_78.group(2).split(",")[0]
+                                cargo_simbolo = regex_nomeacao_tipo_78.group(1)
+
+                            regex_nomeacao_tipo_79 = re.search(r"das[\s-](\d+.\d+),*\se\snomear\s(.+?),*\spara\sexercer\stal\s", trecho)
+
+                            if regex_nomeacao_tipo_79 and encontrado == False:
+                                regex = "regex_nomeacao_tipo_79"
+                                encontrado = True
+                                nome_do_servidor = regex_nomeacao_tipo_79.group(2).split(",")[0]
+                                cargo_simbolo = regex_nomeacao_tipo_79.group(1)
+
                             if encontrado:
                                 count += 1
 
-                            if regex == "":
-                                print(str(index) + " - " + regex + " - " + endereco_do_arquivo + ": " + nome_do_servidor)
+                            # if regex == "" and regex == "regex_nomeacao_tipo_78":
+                            #     print(str(index) + " - " + regex + " - " + endereco_do_arquivo + ": " + nome_do_servidor)
 
-                            #writer.writerow([nome_do_servidor, cargo_simbolo, titulo_da_portaria, data_da_portaria, link_da_portaria])
+                            #print(str(index) + " - " + regex + " - " + endereco_do_arquivo + ": " + nome_do_servidor)
+
+                            writer.writerow([nome_do_servidor, cargo_simbolo, titulo_da_portaria, data_da_portaria, link_da_portaria])
+            if regex != "":
+                print(endereco_do_arquivo)
+                os.rename(endereco_do_arquivo, endereco_do_arquivo_encontrado)
 
     print("Quantidade: " + str(count))
     arquivo_de_saida.close()
