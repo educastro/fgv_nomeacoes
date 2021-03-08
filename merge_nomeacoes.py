@@ -9,9 +9,9 @@ import unidecode
 count = 0
 index = 0
 
-with open("nomeacoes.csv", "w", encoding="utf-8", delimiter=";", newline="") as arquivo_de_saida:
+with open("nomeacoes.csv", "w", encoding="utf-8", newline="") as arquivo_de_saida:
 
-    writer = csv.writer(arquivo_de_saida)
+    writer = csv.writer(arquivo_de_saida, delimiter=";")
 
     writer.writerow(["NOME", "SIMBOLO_NOMEACAO", "TITULO_PORTARIA", "DATA_PORTARIA", "LINK_PORTARIA"])
 
